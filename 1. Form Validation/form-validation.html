@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Form Validation</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Rajdhani:500,700&display=swap");
+       body{
+         font-family: "Rajdhani", sans-serif !important;
+         background-color: gainsboro;
+       }
+       section{
+         width: 100%;
+         padding: 10px 0px;
+       }
+      .form-body{
+        background-color: #fff;
+        padding: 40px;
+      }
+      .error{
+        color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3 form-body">
+            <form>
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="first_name">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="last_name">
+              </div>
+              <div class="form-group">
+                <label for="userName">Username</label>
+                <input type="text" class="form-control" id="userName" name="user_name">
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" name="phone_number">
+              </div>
+              <div class="form-group">
+                <label for="emailAddress">Email address</label>
+                <input type="email" class="form-control" id="emailAddress" name="email_address">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="user_password">
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirm_password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login To Your Account</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="jquery/jquery-3.4.1.min.js"></script>
+    <script src="jquery/jquery.validate.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("form").validate({
+          rules:{
+            first_name:{
+              required:true,
+              name_regex:true,
+              minlength:3
+            },
+            last_name:{
+              required:true,
+              name_regex:true,
+              minlength:3
+            },
+            user_name:{
+              required:true,
+              username_regex:true,
+              minlength:5,
+              notequal:true
+            },
+            phone_number:{
+              required:true,
+              phone_regex:true,
+              minlength:10,
+              length:true
+            },
+            email_address:{
+              required:true,
+              email_regex:true
+            },
+            user_password:{
+              required:true,
+              password_regex:true,
+              minlength:5,
+              notequal:true
+            },
+            confirm_password:{
+              required:true,
+              equalTo:"#password"
+            },
+          },
+          messages:{
+            first_name:{
+              required:"Please enter your first name",
+              minlength:"Firstname must consist of at least 3 characters"
+            },
+            last_name:{
+              required:"Please enter your last name",
+              minlength:"Lastname must consist of at least 3 characters"
+            },
+            user_name:{
+              required:"Please enter a user name",
+              minlength:"Username must consist of at least 5 characters"
+            },
+            phone_number:{
+              required:"Please enter your phone number",
+              minlength:"Phone number must consist of 10 digit"
+            },
+            email_address:{
+              required:"Enter a valid email address"
+            },
+            user_password:{
+              required:"Please provide a password",
+              minlength:"Password must consist of at least 5 characters"
+            },
+            confirm_password:{
+              required:"Please confirm your password",
+              equalTo:"Please enter the same password as above"
+            },
+          }
+        });
+
+        /*! Username concatenate function */
+        $("#userName").focus(function(){
+          var firstname = $("#firstName").val();
+          var lastname = $("#lastName").val();
+          if (firstname && lastname && !this.value){
+            this.value = firstname + lastname;
+          }
+        });
+      });
+
+      /*! Regular expression */
+      /*! Name regex */
+      $.validator.addMethod('name_regex', function(value, element){
+        return this.optional(element) || value == value.match(/^[a-zA-Z_ ]+$/);
+      },'Name can only consist of letters')
+
+      /*! Username regex */
+      $.validator.addMethod('username_regex', function(value, element){
+        return this.optional(element) || value == value.match(/^[a-zA-Z0-9]*[-@._]?[a-zA-Z0-9]*$/);
+      },'Username can only consist of letters, numbers and only one special charecter amongest underscore, @, dot and underscore')
+
+      /*! Phone number regex */
+      $.validator.addMethod('phone_regex', function(value, element){
+        return this.optional(element) || value == value.match(/^[0-9]+$/);
+      },'Phone number can only consist of numbers')
+
+      /*! Phone number limit */
+      $.validator.addMethod('length',function(value,element){
+        return this.optional(element)
+        || value.length <=10
+      },'Phone number should not be more than 10 digit')
+
+      /*! Email regex */
+      $.validator.addMethod('email_regex', function(value, element){
+        return this.optional(element) || value == value.match(/^[+a-zA-Z0-9._-]+@[gmail\yahoo]+\.[a-zA-Z]{2,4}$/i);
+      },'Please enter a valid email address')
+
+      /*! Password regex */
+      $.validator.addMethod('password_regex', function(value, element){
+        return this.optional(element) || value == value.match(/^[a-zA-Z0-9_ ]+$/);
+      },'Password can only consist of alphabets & numbers')
+
+      /*! Username / password should not be equal */
+      $.validator.addMethod('notequal', function(value, element){
+        return $('#userName').val() != $('#password').val()
+      },'Username and password cannot be the same')
+    </script>
+  </body>
+</html>

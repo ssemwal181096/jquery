@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel='stylesheet' href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+    <title>Show Detail</title>
+    <style>
+      body{
+        background-color: gainsboro;
+      }
+      section{
+        width: 100%;
+        padding: 100px 0px;
+      }
+      .responsive-control {
+        display: block;
+        border: 2px solid grey;
+      }
+      .responsive-control:focus {
+        box-shadow: none;
+        border: 2px solid grey;
+      }
+      .responsive-control::placeholder {
+        color: #888;
+      }
+      .responsive-label{
+        font-weight: 600;
+        color:#2e2e2e;
+      }
+      .calender-body{
+        position: relative;
+      }
+      .calender-responsive-control{
+        display: block;
+        width:100%;
+        border: 2px solid grey;
+      }
+      .responsive-calender{
+        color:#2e2e2e;
+      }
+      .responsive-calender:before {
+        display: none;
+      }
+      .responsive-calender:after {
+        content: "\f073";
+        position: absolute;
+        left: 64%;
+        top: 28%;
+      }
+
+      /* changes only in desktop view */
+      @media screen and (min-width: 800px) {
+        .responsive-control {
+          width: 75%;
+        }
+      }
+      /* changes only in desktop view */
+
+      /* Media Query */
+      /* Device = Very small phones
+         Screen = B/w 280px to 315px */
+
+      @media (min-width: 280px) and (max-width: 315px) {
+        .calender-responsive-control {
+          width: 133%;
+        }
+        .responsive-calender:after {
+          left: 85%;
+          top: 28%;
+        }
+      }
+
+      /* Device = All mobile phones, smartphones
+         Screen = B/w 320px to 640px */
+
+      @media (min-width: 320px) and (max-width: 640px) {
+        .calender-responsive-control {
+          width: 175%;
+        }
+        .responsive-calender:after {
+          left: 88%;
+          top: 28%;
+        }
+      }
+
+      /* Device = Tablets, Ipads (portrait)
+         Screen = B/w 768px to 1024px */
+
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .calender-responsive-control {
+          width: 367%;
+        }
+        .responsive-calender:after {
+          left: 94%;
+          top: 28%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form>
+              <div class="row">
+                <div class="col-lg-2">
+                  <label class="responsive-label" for="name">Name</label>
+                </div>
+                <div class="col-lg-6 mb-4">
+                  <input type="text" class="form-control responsive-control" placeholder="Enter your name" id="name">
+                </div>
+                <div class="col-lg-1">
+                  <label class="responsive-label" for="userDate">Date</label>
+                </div>
+                <div class="col-lg-3 calender-body mb-4">
+                  <i class="fa fa-calendar responsive-calender" aria-hidden="true" role="right-icon" id="userDate">
+                    <input type="input" class="form-control calender-responsive-control" placeholder="Date of filling">
+                  </i>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-1">
+                  <label class="responsive-label" for="countryId">Country</label>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select class="form-control responsive-control countries" id="countryId">
+                      <option>Select Country</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-lg-1">
+                  <label class="responsive-label" for="stateId">State</label>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select class="form-control responsive-control states" id="stateId">
+                      <option>Select State</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-lg-1">
+                  <label class="responsive-label" for="cityId">City</label>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select class="form-control responsive-control cities" id="cityId">
+                      <option>Select City</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="jquery/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/countrystatecity.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $('#userDate').datepicker({
+      });
+    </script>
+  </body>
+</html>
